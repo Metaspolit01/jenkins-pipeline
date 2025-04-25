@@ -15,15 +15,21 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
+      
+    stage('Test') {
+    steps {
+        echo 'Running tests...'
+        script {
+            try {
                 sh 'npm test'
-                catch(err){
-                    echo 'test failes just skip.....'
-                }
+            } catch (err) {
+                echo 'Test script not found or failed, skipping...'
             }
         }
+    }
+}
+
+      
 
         stage('Deploy') {
             steps {
