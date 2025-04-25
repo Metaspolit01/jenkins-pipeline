@@ -15,27 +15,25 @@ pipeline {
             }
         }
 
-      
-    stage('Test') {
-    steps {
-        echo 'Running tests...'
-        script {
-            try {
-                sh 'npm test'
-            } catch (err) {
-                echo 'Test script not found or failed, skipping...'
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                script {
+                    try {
+                        sh 'npm test'
+                    } catch (err) {
+                        echo '⚠️ Test script not found. Skipping test step.'
+                    }
+                }
             }
         }
-    }
-}
-
-      
 
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Example: Deploy to a server, cloud, etc.
+                // Add real deployment steps here
             }
         }
     }
 }
+
